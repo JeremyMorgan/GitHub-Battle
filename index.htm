@@ -27,9 +27,9 @@
         <div class="col-md-2"></div>
 
         <div class="col-md-4">
+        <div class="ng-hide" ng-show="player1">
             <h2   class="text-center">{{ player1.name }}</h2>
-            <img ng-src="{{player1.avatar_url}}" title="{{player1.name}}" alt="{{player1.name}}" width="100px" height="100px" border="none">
-            <div class="ng-hide" ng-show="player1">
+            <img ng-src="{{player1.avatar_url}}" title="{{player1.name}}" alt="{{player1.name}}" width="100px" height="100px" border="none">            
             <p>Location: {{player1.location}}</p>
             <p>Public Repos: {{player1.public_repos}}</p>
             <p>Public Gists:  {{player1.public_gists}}</p>
@@ -38,6 +38,7 @@
             </div>
         </div>
         <div class="col-md-4">
+        <div class="ng-hide" ng-show="player2">
             <h2 class="text-center">{{ player2.name}}</h2>
             <img ng-src="{{player2.avatar_url}}" title="{{player2.name}}" alt="{{player2.name}}" width="100px" height="100px" border="none">
 
@@ -46,7 +47,7 @@
             <p>Public Gists:  {{player2.public_gists}}</p>
             <p>Followers:  {{player2.followers}}</p>
             <p>Create Date:  {{player2.created_at}}</p>
-
+        </div>
         </div>
         <div class="col-md-3"></div>
     </div>
