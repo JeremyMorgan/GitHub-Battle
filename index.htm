@@ -29,7 +29,7 @@
         <div class="col-md-4">
             <h2   class="text-center">{{ player1.name }}</h2>
             <img ng-src="{{player1.avatar_url}}" title="{{player1.name}}" alt="{{player1.name}}" width="100px" height="100px" border="none">
-            <div class="ng-hide">
+            <div class="ng-hide" ng-show="player1">
             <p>Location: {{player1.location}}</p>
             <p>Public Repos: {{player1.public_repos}}</p>
             <p>Public Gists:  {{player1.public_gists}}</p>
