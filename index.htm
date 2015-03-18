@@ -29,21 +29,23 @@
         <div class="col-md-4">
             <h2   class="text-center">{{ player1.name }}</h2>
             <img ng-src="{{player1.avatar_url}}" title="{{player1.name}}" alt="{{player1.name}}" width="100px" height="100px" border="none">
-            <p class="ng-hide">Location: {{player1.location}}</p>
-            <p class="ng-hide">Public Repos: {{player1.public_repos}}</p>
-            <p class="ng-hide">Public Gists:  {{player1.public_gists}}</p>
-            <p class="ng-hide">Followers:  {{player1.followers}}</p>
-            <p class="ng-hide">Create Date:  {{player1.created_at}}</p>
+            <div class="ng-hide">
+            <p>Location: {{player1.location}}</p>
+            <p>Public Repos: {{player1.public_repos}}</p>
+            <p>Public Gists:  {{player1.public_gists}}</p>
+            <p>Followers:  {{player1.followers}}</p>
+            <p>Create Date:  {{player1.created_at}}</p>
+            </div>
         </div>
         <div class="col-md-4">
             <h2 class="text-center">{{ player2.name}}</h2>
             <img ng-src="{{player2.avatar_url}}" title="{{player2.name}}" alt="{{player2.name}}" width="100px" height="100px" border="none">
 
-            <p class="ng-hide" ng-value="player2">Location: {{player2.location}}</p>
-            <p class="ng-hide">Public Repos: {{player2.public_repos}}</p>
-            <p class="ng-hide">Public Gists:  {{player2.public_gists}}</p>
-            <p class="ng-hide">Followers:  {{player2.followers}}</p>
-            <p class="ng-hide">Create Date:  {{player2.created_at}}</p>
+            <p ng-value="player2">Location: {{player2.location}}</p>
+            <p>Public Repos: {{player2.public_repos}}</p>
+            <p>Public Gists:  {{player2.public_gists}}</p>
+            <p>Followers:  {{player2.followers}}</p>
+            <p>Create Date:  {{player2.created_at}}</p>
 
         </div>
         <div class="col-md-3"></div>
