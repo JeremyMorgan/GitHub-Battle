@@ -43,8 +43,6 @@
 
                 case 'publicrepos':
 
-                    console.log("We got here - public repos");
-
                     var p1metric = $scope.player1.public_repos;
                     var p2metric = $scope.player2.public_repos;
 
@@ -55,8 +53,6 @@
 
                 case 'publicgists':
 
-                    //console.log("We got here - public gists");
-
                     var p1metric = $scope.player1.public_gists;
                     var p2metric = $scope.player2.public_gists;
                     var p1display = $scope.publicgists1;
@@ -64,8 +60,6 @@
 
                     break;
                 case 'followers':
-
-                    //console.log("We got here - followers");
 
                     var p1metric = $scope.player1.followers;
                     var p2metric = $scope.player2.followers;
@@ -76,11 +70,13 @@
 
             }
 
-            //console.log("Output: " + metric);
+            console.log("Output: " + $scope.player1.public_gists);
 
             // highlight the higher number in green, lower in red
-
             if (p1metric == p2metric) {
+
+                //console.log("p1: " + p1metric);
+                //console.log("p2: " + p2metric);
 
                 p1display = "bg-warning";
                 p2display = "bg-warning";
@@ -101,13 +97,37 @@
         $scope.search = function() {
             $q.all([scrapeGitHub($scope.player1),scrapeGitHub($scope.player2)])
                 .then(function() {
-                    compareResults("publicrepos");
-                    compareResults("publicgists");
-                    compareResults("followers");
+
+                   /*
+                    $scope.$watch(function(scope) { return $scope.player1.public_repos },
+
+                        function() {
+                            console.log("Public Repos: " + $scope.player1.public_repos);
+                        }
+                    );
+                    */
+
+                    scope.$watch(
+                        // This function returns the value being watched. It is called for each turn of the $digest loop
+                        function() { return $scope.player1.public_repos; },
+                        // This is the change listener, called when the value returned from the above function changes
+                        function(newValue, oldValue) {
+                            if ( newValue !== oldValue ) {
+                                // Only increment the counter if the value changed
+                                scope.foodCounter = scope.foodCounter + 1;
+                            }
+                        }
+                    );
+
+                    //compareResults("publicrepos");
+                    //compareResults("publicgists");
+                    //compareResults("followers");
                 })
                 .then(function() {
                     console.log('done')
                 });
+
+
 
         };
     };
