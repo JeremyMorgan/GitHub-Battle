@@ -14,27 +14,14 @@
             input: "JeremyMorgan"
         };
 
-        var getPlayer1Stats = function(response) {
-            // get response data (JSON)
-            $scope.player1.data = response.data;
-        };
-
-        var getPlayer2Stats = function(response) {
-            // get response data (JSON)
-            $scope.player2.data = response.data;
-        };
-
-
         var setPlayerStats = function(response, player) {
             // get response data (JSON)
             player.data = response.data;
         };
 
-
-        var onError = function(reason) {
+        var onError = function (reason) {
             $scope.error = "Could not fetch user";
         };
-
 
         var scrapeGitHub = function (player){
 
@@ -46,68 +33,67 @@
                    deferred.resolve(response); 
                 }, onError);
 
-
             return deferred.promise;    
         };
 
 
-        var compareResults = function(metric){
+        var compareResults = function (metric) {
 
-        switch(metric){
+            switch (metric) {
 
-            case 'publicrepos':
+                case 'publicrepos':
 
-                //console.log("We got here - public repos");
+                    console.log("We got here - public repos");
 
-                var p1metric = $scope.player1.public_repos;
-                var p2metric = $scope.player2.public_repos;
+                    var p1metric = $scope.player1.public_repos;
+                    var p2metric = $scope.player2.public_repos;
 
-                var p1display = $scope.publicrepos1;
-                var p2display = $scope.publicrepos2;
+                    var p1display = $scope.publicrepos1;
+                    var p2display = $scope.publicrepos2;
 
-                break;
+                    break;
 
-            case 'publicgists':
+                case 'publicgists':
 
-                //console.log("We got here - public gists");
+                    //console.log("We got here - public gists");
 
-                var p1metric = $scope.player1.public_gists;
-                var p2metric = $scope.player2.public_gists;
-                var p1display = $scope.publicgists1;
-                var p2display = $scope.publicgists2;
+                    var p1metric = $scope.player1.public_gists;
+                    var p2metric = $scope.player2.public_gists;
+                    var p1display = $scope.publicgists1;
+                    var p2display = $scope.publicgists2;
 
-                break;
-            case 'followers':
+                    break;
+                case 'followers':
 
-                //console.log("We got here - followers");
+                    //console.log("We got here - followers");
 
-                var p1metric = $scope.player1.followers;
-                var p2metric = $scope.player2.followers;
-                var p1display = $scope.followers1;
-                var p2display = $scope.followers2;
+                    var p1metric = $scope.player1.followers;
+                    var p2metric = $scope.player2.followers;
+                    var p1display = $scope.followers1;
+                    var p2display = $scope.followers2;
 
-                break;
+                    break;
 
-        }
+            }
 
-        //console.log("Output: " + metric);
+            //console.log("Output: " + metric);
 
-        // highlight the higher number in green, lower in red
+            // highlight the higher number in green, lower in red
 
-            if(p1metric == p2metric){
+            if (p1metric == p2metric) {
 
                 p1display = "bg-warning";
                 p2display = "bg-warning";
 
-            }else {
-                if(p1metric > p2metric){
+            } else {
+                if (p1metric > p2metric) {
                     p1display = "bg-success";
                     p2display = "bg-danger";
 
-                    }else {
-                        p1display = "bg-danger";
-                        p2display = "bg-success";
-                    }
+                } else {
+                    p1display = "bg-danger";
+                    p2display = "bg-success";
+                }
             }
 
         };
@@ -122,6 +108,7 @@
                 .then(function() {
                     console.log('done')
                 });
+
         };
     };
 
