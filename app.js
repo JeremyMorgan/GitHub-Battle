@@ -2,23 +2,32 @@
 
     var app = angular.module('githubbattle', []);
 
-    var MainController = function($scope, $http) {
+    var MainController = function($scope, $http, $q) {
 
-        $scope.player1input = "DannyNunez";
-        $scope.player2input = "JeremyMorgan";
+        $scope.player1 = {
+            data: null,
+            input: "DannyNunez"
+        };
 
-        $scope.player1 = null;
-        $scope.player2 = null;
-
+        $scope.player2 = {
+            data: null,
+            input: "JeremyMorgan"
+        };
 
         var getPlayer1Stats = function(response) {
             // get response data (JSON)
-            $scope.player1 = response.data;
+            $scope.player1.data = response.data;
         };
 
         var getPlayer2Stats = function(response) {
             // get response data (JSON)
-            $scope.player2 = response.data;
+            $scope.player2.data = response.data;
+        };
+
+
+        var setPlayerStats = function(response, player) {
+            // get response data (JSON)
+            player.data = response.data;
         };
 
 
@@ -27,13 +36,18 @@
         };
 
 
-        var scrapeGitHub = function (player1input, player2input){
+        var scrapeGitHub = function (player){
 
-            $http.get("https://api.github.com/users/" + player1input)
-                .then(getPlayer1Stats, onError);
+            var deferred = $q.defer();
 
-            $http.get("https://api.github.com/users/" + player2input)
-                .then(getPlayer2Stats, onError);
+            $http.get("https://api.github.com/users/" + player.input)
+                .then(function(response) {
+                   setPlayerStats(response, player);
+                   deferred.resolve(response); 
+                }, onError);
+
+
+            return deferred.promise;    
         };
 
 
@@ -98,23 +112,19 @@
 
         };
 
-        $scope.search = function(player1input, player2input) {
-
-
-
-            scrapeGitHub(player1input,player2input);
-
-            compareResults("publicrepos");
-            compareResults("publicgists");
-            compareResults("followers");
-
-            //$scope.publicrepos2 = "bg-success";
-
+        $scope.search = function() {
+            $q.all([scrapeGitHub($scope.player1),scrapeGitHub($scope.player2)])
+                .then(function() {
+                    compareResults("publicrepos");
+                    compareResults("publicgists");
+                    compareResults("followers");
+                })
+                .then(function() {
+                    console.log('done')
+                });
         };
-
-
     };
 
-    app.controller("MainController", ["$scope", "$http", MainController]);
+    app.controller("MainController", ["$scope", "$http", '$q', MainController]);
 
 }());
